@@ -1,0 +1,20 @@
+$color: red;
+.hello{
+    color: $color;
+    text-align: center;
+    opacity: 1;
+    transform: rotate(45deg);
+    transition: all 1s;
+}
+.ossos{
+    color: green;
+}
+.helloImg{
+    color: $color;
+    &.hoho{
+        color: black;
+    }
+    &:hover{
+        color: #3bb5fc;
+    }
+}
