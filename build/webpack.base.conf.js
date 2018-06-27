@@ -8,15 +8,16 @@ const purifyCssWebpack = require("purifycss-webpack");
 // 页面汇集
 const htmlArray = require('./webpack.html.conf')
 
-var getHtmlConfig = function (name, chunks) {
+var getHtmlConfig = function (title,name, chunks) {
   return {
     template: `./src/pages/${name}.html`,
     filename: `${name}.html`,
     // favicon: './favicon.ico',
-    // title: title,
+    title: title,
     inject: true,
     // hash: true, //开启hash  ?[hash]
     chunks: chunks,//页面要引入的包
+    chunksSortMode: 'manual',//顺序
     minify: process.env.NODE_ENV === "development" ? false : {
       removeComments: true, //移除HTML中的注释
       // collapseWhitespace: true, //折叠空白区域 也就是压缩代码
@@ -52,5 +53,5 @@ module.exports = {
 
 //自动生成html模板
 htmlArray.forEach((element) => {
-  module.exports.plugins.push(new htmlWebpackPlugin(getHtmlConfig(element._html, element.chunks)));
+  module.exports.plugins.push(new htmlWebpackPlugin(getHtmlConfig(element.title,element._html, element.chunks)));
 })
